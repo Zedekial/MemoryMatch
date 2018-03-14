@@ -1,1 +1,73 @@
-<!-- CSS Stylesheet -->
+/* CSS Stylesheet */
+#main-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#game-title-container {
+  width: 80vw;
+  background-color: blue;
+  height: 100px;
+  padding: 10px;
+}
+
+#game-title {
+  text-align: center;
+  color: white;
+}
+
+#cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: lightblue;
+  width: 80vw;
+  height: auto;
+  padding: 10px;
+  border: solid 3px purple;
+}
+
+.first-row {
+  display: flex;
+  justify-content: center;
+  flex: 1 100%;
+  margin: 10px;
+}
+
+.second-row {
+  display: flex;
+  justify-content: center;
+  flex: 1 100%;
+  margin: 10px;
+}
+
+.third-row {
+  display: flex;
+  justify-content: center;
+  flex: 1 100%;
+  margin: 10px;
+}
+
+.fourth-row {
+  display: flex;
+  justify-content: center;
+  flex: 1 100%;
+  margin: 10px;
+}
+
+.card {
+  display: flex;
+  background-color: pink;
+  text-align: center;
+  width: 100px;
+  height: 150px;
+  border: solid black 2px;
+  border-radius: 30px;
+  margin: 0 10px 0 10px;
+}
+
+.card-symbol {
+  margin: 0 auto;
+  color: black;
+  font-size: 60px;
+}

@@ -1,1 +1,1 @@
-<!-- JavaScript file -->
+// JavaScript file
