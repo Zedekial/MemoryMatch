@@ -2,31 +2,38 @@
 
 //Variables needed
 //Card symbols IE dog, cat, bird 'all start at 0'
+let cat = 0;
+let dog = 0;
+let bird = 0;
+let wolf = 0;
+let bear = 0;
+let parrot = 0;
+let tiger = 0;
+let rhino = 0;
 //Click counter
+let click = 0;
 //Timer
+let timer = 0;
 //Game won boolean
+let gameWon = false;
 //?
 
-//Create cards
-//New div - add class
-//New h1 - add class
-//Randomise h1 content out of 8 possible symbols
+//Assign symbols
+function assignSymbols {
+  //Grab rows for refrence
+  firstRow = document.querySelector('.first-row')
+  secondRow = document.querySelector('.second-row')
+  thirdRow = document.querySelector('.third-row')
+  fourthRow = document.querySelector('.fourth-row')
+//Select cards one by one
+//Randomise symbol out of the 8 possible
 //Check counter for symbol chosen
 //If === 2
 //Reroll symbol
 //If ==< 2
 //Add count to symbol chosen IE id=dog, dogCounter +=
-//Add ID to h1 based on symbol
-//object div - append h1
-//Group 4 card objects as 1 object
-//Run script 16 times
-
-//Append Cards to document body
-//Hide rows
-//Select row
-//Append group of 4 cards element
-//Select new row, repeat
-//Unhide rows
+//Add ID to card div based on symbol
+//Repeat 16 times
 
 //Click script
 //CSS Change on click IE card highlighted and flipped
