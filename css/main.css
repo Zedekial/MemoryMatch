@@ -27,6 +27,15 @@
   border: solid 3px purple;
 }
 
+/* Symbols */
+
+#cat {
+  background-image: url('../images/chocobo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .first-row {
   display: flex;
   justify-content: center;
@@ -56,7 +65,6 @@
 }
 
 .card {
-  display: flex;
   background-color: pink;
   text-align: center;
   width: 100px;
@@ -66,8 +74,6 @@
   margin: 0 10px 0 10px;
 }
 
-.card-symbol {
-  margin: 0 auto;
-  color: black;
-  font-size: 60px;
+.backside {
+  background-color: white;
 }

@@ -19,12 +19,13 @@ let gameWon = false;
 //?
 
 //Assign symbols
-function assignSymbols {
+function assignSymbols() {
   //Grab rows for refrence
   firstRow = document.querySelector('.first-row')
   secondRow = document.querySelector('.second-row')
   thirdRow = document.querySelector('.third-row')
   fourthRow = document.querySelector('.fourth-row')
+}
 //Select cards one by one
 //Randomise symbol out of the 8 possible
 //Check counter for symbol chosen
@@ -36,6 +37,22 @@ function assignSymbols {
 //Repeat 16 times
 
 //Click script
+$('.first-row').on('click','div',function() {
+  $(this).toggleClass('backside');
+});
+
+$('.second-row').on('click','div',function() {
+  $(this).toggleClass('backside');
+});
+
+$('.third-row').on('click','div',function() {
+  $(this).toggleClass('backside');
+});
+
+$('.fourth-row').on('click','div',function() {
+  $(this).toggleClass('backside');
+});
+
 //CSS Change on click IE card highlighted and flipped
 //Variable for current selected card
 //Variable for second selected card
