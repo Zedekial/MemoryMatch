@@ -2,7 +2,7 @@
 
 //Variables needed
 //Card symbols IE dog, cat, bird 'all start at 0'
-let cat = 0;
+let chocobo = 0;
 let dog = 0;
 let bird = 0;
 let wolf = 0;
@@ -21,11 +21,10 @@ let gameWon = false;
 //Assign symbols
 function assignSymbols() {
   //Grab rows for refrence
-  firstRow = document.querySelector('.first-row')
-  secondRow = document.querySelector('.second-row')
-  thirdRow = document.querySelector('.third-row')
-  fourthRow = document.querySelector('.fourth-row')
+  row = document.querySelector('.row')
 }
+
+let cardSelected =
 //Select cards one by one
 //Randomise symbol out of the 8 possible
 //Check counter for symbol chosen
@@ -37,20 +36,12 @@ function assignSymbols() {
 //Repeat 16 times
 
 //Click script
-$('.first-row').on('click','div',function() {
+$('.row').on('click','div',function() {
   $(this).toggleClass('backside');
-});
-
-$('.second-row').on('click','div',function() {
-  $(this).toggleClass('backside');
-});
-
-$('.third-row').on('click','div',function() {
-  $(this).toggleClass('backside');
-});
-
-$('.fourth-row').on('click','div',function() {
-  $(this).toggleClass('backside');
+  let id = $(this).attr('id');
+  if(id == 'chocobo') {
+    console.log('chocobo');
+  }
 });
 
 //CSS Change on click IE card highlighted and flipped

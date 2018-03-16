@@ -29,44 +29,46 @@
 
 /* Symbols */
 
-#cat {
+#chocobo {
   background-image: url('../images/chocobo.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
 }
 
-.first-row {
+.row {
   display: flex;
   justify-content: center;
   flex: 1 100%;
   margin: 10px;
 }
 
-.second-row {
-  display: flex;
-  justify-content: center;
-  flex: 1 100%;
-  margin: 10px;
-}
+      /*.second-row {
+        display: flex;
+        justify-content: center;
+        flex: 1 100%;
+        margin: 10px;
+      }
 
-.third-row {
-  display: flex;
-  justify-content: center;
-  flex: 1 100%;
-  margin: 10px;
-}
+      .third-row {
+        display: flex;
+        justify-content: center;
+        flex: 1 100%;
+        margin: 10px;
+      }
 
-.fourth-row {
-  display: flex;
-  justify-content: center;
-  flex: 1 100%;
-  margin: 10px;
-}
+      .fourth-row {
+        display: flex;
+        justify-content: center;
+        flex: 1 100%;
+        margin: 10px;
+      } */
 
 .card {
   background-color: pink;
-  text-align: center;
   width: 100px;
   height: 150px;
   border: solid black 2px;
@@ -76,4 +78,5 @@
 
 .backside {
   background-color: white;
+  background-image: none !important;
 }
