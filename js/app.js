@@ -2,14 +2,14 @@
 
 //Variables needed
 //Card symbols IE dog, cat, bird 'all start at 0'
+let cactaur = 0;
 let chocobo = 0;
-let dog = 0;
-let bird = 0;
-let wolf = 0;
-let bear = 0;
-let parrot = 0;
-let tiger = 0;
-let rhino = 0;
+let moogle = 0;
+let penguin = 0;
+let plantie = 0;
+let shark = 0;
+let turtle = 0;
+let vivi = 0;
 //Click counter
 let click = 0;
 //Timer
@@ -18,30 +18,27 @@ let timer = 0;
 let gameWon = false;
 //?
 
-//Assign symbols
+//Shuffle Symbols
 function assignSymbols() {
   //Grab rows for refrence
   row = document.querySelector('.row')
 }
 
-let cardSelected =
-//Select cards one by one
-//Randomise symbol out of the 8 possible
-//Check counter for symbol chosen
-//If === 2
-//Reroll symbol
-//If ==< 2
-//Add count to symbol chosen IE id=dog, dogCounter +=
-//Add ID to card div based on symbol
-//Repeat 16 times
+//Each card div is iterated through
+$('.card').each(function(pos, obj){
+  //Remove from container
+  //Store divs
+  //Shuffle all sixteen divs
+  //Add divs back to container in groups of four
+});
 
 //Click script
 $('.row').on('click','div',function() {
   $(this).toggleClass('backside');
   let id = $(this).attr('id');
-  if(id == 'chocobo') {
-    console.log('chocobo');
-  }
+  console.log(id)
+  click = click + 1;
+  console.log(click);
 });
 
 //CSS Change on click IE card highlighted and flipped

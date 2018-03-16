@@ -39,6 +39,76 @@
   border-radius: 30px;
 }
 
+#cactaur {
+  background-image: url('../images/cactaur.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
+#moogle {
+  background-image: url('../images/moogle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
+#penguin {
+  background-image: url('../images/penguin.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
+#plantie {
+  background-image: url('../images/plantie.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
+#shark {
+  background-image: url('../images/shark.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
+#turtle {
+  background-image: url('../images/turtle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
+#vivi {
+  background-image: url('../images/vivi.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 150px;
+  border-radius: 30px;
+}
+
 .row {
   display: flex;
   justify-content: center;
