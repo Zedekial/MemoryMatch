@@ -2,14 +2,16 @@
 
 //Variables needed
 //Card symbols IE dog, cat, bird 'all start at 0'
-let cactaur = 0;
-let chocobo = 0;
-let moogle = 0;
-let penguin = 0;
-let plantie = 0;
-let shark = 0;
-let turtle = 0;
-let vivi = 0;
+let symbolsObject = {
+  'cactaur' : 0,
+  'chocobo' : 0,
+  'moogle' : 0,
+  'penguin' : 0,
+  'plantie' : 0,
+  'shark' : 0,
+  'turtle' : 0,
+  'vivi' : 0
+}
 //Click counter
 let click = 0;
 //Timer
@@ -40,11 +42,49 @@ function shuffleCards() {
 
 //Click script
 $('#card-container-inner').on('click','div',function() {
-  $(this).toggleClass('backside');
-  let id = $(this).attr('id');
-  console.log('You clicked a ' + id)
-  click = click + 1;
-  console.log('Number of clicks so far ' + click);
+    //Grab clicked div or 'card' and toggle the 'backside' class
+    //The backside class hides the image and changes the colors in css
+    $(this).toggleClass('backside');
+    $(this).toggleClass('current-pair');
+    //Stores card ID as an ID variable
+    let id = $(this).attr('id');
+    //Store class
+    let cardClass = $(this).attr('class');
+    console.log('Classes are ' + cardClass);
+    //Access 'symbolsObject' using id name 'id name of card and items in object are identicle',
+    //Then increase the item by 1 'they start at 0'
+    symbolsObject[id] += 1;
+    console.log('You clicked a ' + id + ', counter is ' + symbolsObject[id]);
+    //Stores number of total clicks on cards to 'click' variable
+    click = click + 1;
+    //Stores current clicks in 'currentClicks' variable, once at 2 it will check to see
+    //if symbols are matched
+    currentClicks = currentClicks + 1;
+    console.log('Number of clicks so far ' + click);
+    console.log('Current clicks ' + currentClicks);
+    //Checks if current clicks are 2 (for a pair), if true checks symbols for each id,
+    if(currentClicks === 2){
+      let pair = $('.current-pair');
+      //If at 2 it will state a pair has been matched
+      if(symbolsObject[id] === 2){
+        console.log('You matched a pair of ' + id + "'s")
+        //Toggle the 'matched' class which will prevent clicking and keep the front flipped
+        pair.toggleClass('matched')
+        //Toggle the 'current-pair' class off which can then be used again for next pair
+        pair.toggleClass('current-pair')
+        //If not at 2 it will state no match and reset the id's to 0
+      }else{
+        //Update variable object based on id of card
+        let symbolA = pair[0];
+        console.log(symbolA);
+        let symbolB = pair[1];
+        console.log(symbolB);
+        console.log('No match ' + id + ' has been reset to 0!');
+      }
+      //After checking for pairs the current clicks will be reset to 0
+      currentClicks = 0;
+      console.log('Current Clicks has been reset to ' + currentClicks)
+    }
 });
 
 //CSS Change on click IE card highlighted and flipped
