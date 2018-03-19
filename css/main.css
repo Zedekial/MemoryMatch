@@ -17,14 +17,42 @@
   color: white;
 }
 
-#cards-container {
-  display: flex;
-  flex-wrap: wrap;
+#card-container {
   background-color: lightblue;
   width: 80vw;
   height: auto;
   padding: 10px;
   border: solid 3px purple;
+}
+
+#card-container-inner {
+  display: flex;
+  flex-wrap: wrap;
+  width: auto;
+  max-width: 600px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: pink;
+  width: 100px;
+  height: 150px;
+  border: solid black 2px;
+  border-radius: 30px;
+  margin: 10px;
+}
+
+.backside {
+  background-color: white;
+  background-image: none !important;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  flex: 1 100%;
+  margin: 10px;
 }
 
 /* Symbols */
@@ -107,46 +135,4 @@
   width: 100px;
   height: 150px;
   border-radius: 30px;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  flex: 1 100%;
-  margin: 10px;
-}
-
-      /*.second-row {
-        display: flex;
-        justify-content: center;
-        flex: 1 100%;
-        margin: 10px;
-      }
-
-      .third-row {
-        display: flex;
-        justify-content: center;
-        flex: 1 100%;
-        margin: 10px;
-      }
-
-      .fourth-row {
-        display: flex;
-        justify-content: center;
-        flex: 1 100%;
-        margin: 10px;
-      } */
-
-.card {
-  background-color: pink;
-  width: 100px;
-  height: 150px;
-  border: solid black 2px;
-  border-radius: 30px;
-  margin: 0 10px 0 10px;
-}
-
-.backside {
-  background-color: white;
-  background-image: none !important;
 }
