@@ -20,7 +20,8 @@ let timer = 0;
 let gameWon = false;
 //Clicks this guess (max 2)
 let currentClicks = 0;
-
+//Create id array for storing the ids of current clicked pair
+let id = []
 //Call shuffleCards function on document ready
 $(function(){
   shuffleCards();
@@ -46,15 +47,14 @@ $('#card-container-inner').on('click','div',function() {
     //The backside class hides the image and changes the colors in css
     $(this).toggleClass('backside');
     $(this).toggleClass('current-pair');
-    //Stores card ID as an ID variable
-    let id = $(this).attr('id');
+    //Pushes id of current clicked card as a string in the id object
+    id.push($(this).attr('id'));
+    currentCard = $(this).attr('id');
+    console.log(id)
     //Store class
     let cardClass = $(this).attr('class');
     console.log('Classes are ' + cardClass);
-    //Access 'symbolsObject' using id name 'id name of card and items in object are identicle',
-    //Then increase the item by 1 'they start at 0'
-    symbolsObject[id] += 1;
-    console.log('You clicked a ' + id + ', counter is ' + symbolsObject[id]);
+    console.log('You clicked a ' + currentCard);
     //Stores number of total clicks on cards to 'click' variable
     click = click + 1;
     //Stores current clicks in 'currentClicks' variable, once at 2 it will check to see
@@ -65,9 +65,13 @@ $('#card-container-inner').on('click','div',function() {
     //Checks if current clicks are 2 (for a pair), if true checks symbols for each id,
     if(currentClicks === 2){
       let pair = $('.current-pair');
-      //If at 2 it will state a pair has been matched
-      if(symbolsObject[id] === 2){
-        console.log('You matched a pair of ' + id + "'s")
+      //Access 'symbolsObject' using id name 'id name of card and counters in object are identical',
+      //Then increase the item by 1 'they start at 0'
+      symbolsObject[id[0]] += 1;
+      symbolsObject[id[1]] += 1;
+      //If symbols in array 'id' match it will state a pair has been matched
+      if(id[0] === id[1]){
+        console.log('You matched a pair, a ' + id[0] + ' and a ' + id[1])
         //Toggle the 'matched' class which will prevent clicking and keep the front flipped
         pair.toggleClass('matched')
         //Toggle the 'current-pair' class off which can then be used again for next pair
@@ -75,14 +79,22 @@ $('#card-container-inner').on('click','div',function() {
         //If not at 2 it will state no match and reset the id's to 0
       }else{
         //Update variable object based on id of card
-        let symbolA = pair[0];
-        console.log(symbolA);
-        let symbolB = pair[1];
-        console.log(symbolB);
-        console.log('No match ' + id + ' has been reset to 0!');
+        symbolsObject[id[0]] = 0;
+        symbolsObject[id[1]] = 0;
+        //Toggle off the 'current-pair' class
+        pair.toggleClass('current-pair');
+        //After a 1 second delay the cards return to 'backside' using the backside class
+        setTimeout (function(){
+          pair.toggleClass('backside');
+        }, 1000);
+
+        console.log(pair);
+        console.log('No match ' + id[0] + ' and ' + id[1] + ' have been reset to 0!');
       }
       //After checking for pairs the current clicks will be reset to 0
       currentClicks = 0;
+      //Resets the array containing the current pair to empty it. Otherwise the array keeps filling.
+      id.length = 0;
       console.log('Current Clicks has been reset to ' + currentClicks)
     }
 });
@@ -105,11 +117,8 @@ $('#card-container-inner').on('click','div',function() {
 //Activate script to flip back over
 
 //New game button
-//Hide all rows
-//Delete children of all rows
-//Run 'Create Cards' script
-//Run 'Append Cards' script
-//Unhide rows
+//Run 'shuffleCards' script
+
 
 //Timer button
 //On click start counter
