@@ -1,6 +1,6 @@
 // JavaScript file
 
-//Variables needed
+
 //Card symbols IE dog, cat, bird 'all start at 0'
 let symbolsObject = {
   'cactaur' : 0,
@@ -12,10 +12,14 @@ let symbolsObject = {
   'turtle' : 0,
   'vivi' : 0
 }
+//Boolean to stop rapid clicking
+let calculatingPair = false;
 //Click counter
-let click = 0;
+let totalClicks = 0;
 //Timer
 let timer = 0;
+//Count pairs for winning parameters
+let totalPairs = 0;
 //Game won boolean
 let gameWon = false;
 //Clicks this guess (max 2)
@@ -25,8 +29,15 @@ let id = []
 //Call shuffleCards function on document ready
 $(function(){
   shuffleCards();
+  displayClicks();
 });
 
+
+
+//Display current clicks
+function displayClicks () {
+  document.getElementById('display-clicks').innerHTML = totalClicks;
+};
 //Shuffle Symbols
 //Each card div is iterated through
 function shuffleCards() {
@@ -43,6 +54,7 @@ function shuffleCards() {
 
 //Click script
 $('#card-container-inner').on('click','div',function() {
+  if(calculatingPair === false && gameWon === false) {
     //Grab clicked div or 'card' and toggle the 'backside' class
     //The backside class hides the image and changes the colors in css
     $(this).toggleClass('backside');
@@ -56,14 +68,18 @@ $('#card-container-inner').on('click','div',function() {
     console.log('Classes are ' + cardClass);
     console.log('You clicked a ' + currentCard);
     //Stores number of total clicks on cards to 'click' variable
-    click = click + 1;
+    totalClicks = totalClicks + 1;
+    displayClicks();
     //Stores current clicks in 'currentClicks' variable, once at 2 it will check to see
     //if symbols are matched
     currentClicks = currentClicks + 1;
-    console.log('Number of clicks so far ' + click);
+    console.log('Number of clicks so far ' + totalClicks);
     console.log('Current clicks ' + currentClicks);
     //Checks if current clicks are 2 (for a pair), if true checks symbols for each id,
     if(currentClicks === 2){
+      //Switch the 'calculatingPair' boolean to true, this is to stop rampant clicking
+      calculatingPair = true;
+      //Assign the pair variable based on toggled class 'current-pair'
       let pair = $('.current-pair');
       //Access 'symbolsObject' using id name 'id name of card and counters in object are identical',
       //Then increase the item by 1 'they start at 0'
@@ -72,11 +88,19 @@ $('#card-container-inner').on('click','div',function() {
       //If symbols in array 'id' match it will state a pair has been matched
       if(id[0] === id[1]){
         console.log('You matched a pair, a ' + id[0] + ' and a ' + id[1])
+        //Add a count of 1 to the 'totalPairs' variable
+        totalPairs = totalPairs + 1;
         //Toggle the 'matched' class which will prevent clicking and keep the front flipped
-        pair.toggleClass('matched')
+        pair.toggleClass('matched');
         //Toggle the 'current-pair' class off which can then be used again for next pair
-        pair.toggleClass('current-pair')
-        //If not at 2 it will state no match and reset the id's to 0
+        pair.toggleClass('current-pair');
+        //If the totalPairs is now 8 this means all pairs have been matched, the game is won
+        if(totalPairs === 8){
+          gameWon = true;
+          console.log('Game won is ' + gameWon);
+        }
+      //If the symbols don't match the else statement will trigger setting the symbol counters
+      //to 0 and toggling off 'current pair' and 'backside' classes.
       }else{
         //Update variable object based on id of card
         symbolsObject[id[0]] = 0;
@@ -84,7 +108,7 @@ $('#card-container-inner').on('click','div',function() {
         //Toggle off the 'current-pair' class
         pair.toggleClass('current-pair');
         //After a 1 second delay the cards return to 'backside' using the backside class
-        setTimeout (function(){
+        setTimeout (function() {
           pair.toggleClass('backside');
         }, 1000);
 
@@ -95,8 +119,13 @@ $('#card-container-inner').on('click','div',function() {
       currentClicks = 0;
       //Resets the array containing the current pair to empty it. Otherwise the array keeps filling.
       id.length = 0;
-      console.log('Current Clicks has been reset to ' + currentClicks)
+      console.log('Current Clicks has been reset to ' + currentClicks);
+      //Reset the 'calculatingPair' boolean to allow clicking again
+      setTimeout (function() {
+      calculatingPair = false;
+      }, 1300);
     }
+  }
 });
 
 //CSS Change on click IE card highlighted and flipped

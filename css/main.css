@@ -6,15 +6,31 @@
 }
 
 #game-title-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
   width: 80vw;
   background-color: blue;
   height: 100px;
   padding: 10px;
+  padding-top: 30px;
 }
 
 #game-title {
-  text-align: center;
   color: white;
+  flex: 0 100%;
+  margin: 0 auto;
+}
+
+#total-clicks {
+  color: red;
+  flex: 1 50%;
+}
+
+#time-taken {
+  color: red;
+  flex: 2 50%;
 }
 
 #card-container {
@@ -46,13 +62,6 @@
 .backside {
   background-color: white;
   background-image: none !important;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  flex: 1 100%;
-  margin: 10px;
 }
 
 /* Symbols */
