@@ -16,29 +16,35 @@ let click = 0;
 let timer = 0;
 //Game won boolean
 let gameWon = false;
-//?
+//Clicks this guess (max 2)
+let currentClicks = 0;
 
-//Shuffle Symbols
-function assignSymbols() {
-  //Grab rows for refrence
-  row = document.querySelector('.row')
-}
-
-//Each card div is iterated through
-$('.card').each(function(pos, obj){
-  //Remove from container
-  //Store divs
-  //Shuffle all sixteen divs
-  //Add divs back to container in groups of four
+//Call shuffleCards function on document ready
+$(function(){
+  shuffleCards();
 });
 
+//Shuffle Symbols
+//Each card div is iterated through
+function shuffleCards() {
+  //Grab container div
+  let container = $('#card-container-inner');
+  //Grab child of container (these are cards)
+  let divs = container.children();
+  //Cycle through each card div
+  while (divs.length) {
+    //Remove all card divs, shuffle and then add back to container div
+    container.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+  }
+};
+
 //Click script
-$('.row').on('click','div',function() {
+$('#card-container-inner').on('click','div',function() {
   $(this).toggleClass('backside');
   let id = $(this).attr('id');
-  console.log(id)
+  console.log('You clicked a ' + id)
   click = click + 1;
-  console.log(click);
+  console.log('Number of clicks so far ' + click);
 });
 
 //CSS Change on click IE card highlighted and flipped
