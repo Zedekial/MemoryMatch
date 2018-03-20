@@ -99,6 +99,8 @@ $('#card-container-inner').on('click','div',function() {
         console.log('You matched a pair, a ' + id[0] + ' and a ' + id[1])
         //Add a count of 1 to the 'totalPairs' variable
         totalPairs = totalPairs + 1;
+        //Run 'matchedPair' function for animation
+        animations.matchedPair();
         //Toggle the 'matched' class which will prevent clicking and keep the front flipped
         pair.toggleClass('matched');
         //Toggle the 'current-pair' class off which can then be used again for next pair
@@ -107,18 +109,20 @@ $('#card-container-inner').on('click','div',function() {
         if(totalPairs === 8){
           winGame();
         }
-      //If the symbols don't match the else statement will trigger setting the symbol counters
+      //If the symbols don't match the else statement will trigger, setting the symbol counters
       //to 0 and toggling off 'current pair' and 'backside' classes.
       }else{
         //Update variable object based on id of card
         symbolsObject[id[0]] = 0;
         symbolsObject[id[1]] = 0;
+        //Run the flipCard script
+        animations.notPair();
         //Toggle off the 'current-pair' class
         pair.toggleClass('current-pair');
         //After a 1 second delay the cards return to 'backside' using the backside class
         setTimeout (function() {
           pair.toggleClass('backside');
-        }, 1000);
+        }, 800);
 
         console.log(pair);
         console.log('No match ' + id[0] + ' and ' + id[1] + ' have been reset to 0!');
@@ -131,27 +135,72 @@ $('#card-container-inner').on('click','div',function() {
       //Reset the 'calculatingPair' boolean to allow clicking again
       setTimeout (function() {
       calculatingPair = false;
-      }, 1300);
+      }, 900);
     }
   }
 });
 
-//CSS Change on click IE card highlighted and flipped
-//Variable for current selected card
-//Variable for second selected card
-//Add +1 to click counter
-//Check if card IDs match
-//If Yes
-//Active boolean to keep cards flipped
-//Add + 1 to 'pairs variable'
-//Check 'pairs variable === 8'
-  //If Yes
-  //Set game won to yes
-  //Set page to 'you won' page
-  //If No
-  //Do nothing
-//If No
-//Activate script to flip back over
+//Animations
+var animations = {
+  flipCard: function() {
+
+  },
+
+  notPair: function() {
+    //Grab the pair using the temporary 'current-pair' class, this is toggled
+    //on and off during the script.
+    let cardPair = $('.current-pair');
+    //Change border color to red temporarily
+    cardPair.css('border-color', 'red');
+    setTimeout (function(){
+      cardPair.css('border-color', 'black');
+    }, 800);
+    //Animate the current pair to squash and stretch
+    let cardHeight = cardPair.css('height');
+    let cardWidth = cardPair.css('width');
+    let growHeight = parseFloat(cardHeight, 10) - 20;
+    let growWidth = parseFloat(cardWidth, 10) - 20;
+    cardPair.animate({
+      height: growHeight,
+      width: growWidth
+    }, 300);
+    //Then animate to be the original size
+    cardPair.animate({
+      height: cardHeight,
+      width: cardWidth
+    }, 300);
+    console.log('No match!')
+  },
+
+  //Matched Pair function is referenced on line 103
+  matchedPair: function() {
+    //Grab the pair using the temporary 'current-pair' class, this is toggled
+    //on and off during the script.
+    let cardPair = $('.current-pair');
+    //Change border color to green temporarily
+    cardPair.css('border-color', 'green');
+    setTimeout (function(){
+      cardPair.css('border-color', 'black');
+    }, 800);
+    //Animate the current pair to be slightly bigger
+    let cardHeight = cardPair.css('height');
+    let cardWidth = cardPair.css('width');
+    let growHeight = parseFloat(cardHeight, 10) + 20;
+    let growWidth = parseFloat(cardWidth, 10) + 20;
+    console.log(growHeight + ' ' + growWidth);
+    console.log(cardHeight + ' ' + cardWidth);
+    cardPair.animate({
+      height: growHeight,
+      width: growWidth
+    }, 300);
+    //Then animate to be the original size
+    cardPair.animate({
+      height: cardHeight,
+      width: cardWidth
+    }, 300);
+    console.log('Its a match!')
+  }
+};
 
 //New game button
 //Run 'shuffleCards' script
@@ -185,6 +234,8 @@ function timer() {
     if(gameWon === true){
       return;
     }else {
+      //If the seconds counter is less than 9 the script will check for
+      //whether it's 10 or 0, this is to add a zero in front for aesthetics
       if(seconds <= 9) {
         seconds = seconds + 1;
         if(seconds === 10){
@@ -197,6 +248,8 @@ function timer() {
           document.getElementById('seconds-display').innerHTML = seconds;
           setTimeout(counter, 1000);
         }
+      //The code then checks to see if the seconds are at 59, this will increase the
+      //minute counter and reset the seconds to 0 if at 59
       }else if(seconds != 59) {
         seconds = seconds + 1;
         document.getElementById('seconds-display').innerHTML = seconds;

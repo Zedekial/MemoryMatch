@@ -52,6 +52,7 @@
 
 .card {
   background-color: pink;
+  position: relative;
   width: 100px;
   height: 150px;
   border: solid black 2px;
