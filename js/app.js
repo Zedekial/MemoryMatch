@@ -14,10 +14,13 @@ let symbolsObject = {
 }
 //Boolean to stop rapid clicking
 let calculatingPair = false;
+//Boolean to signify first click and start timer
+let firstClick = true;
+//Timer variables
+let seconds = 00;
+let minutes = 00;
 //Click counter
 let totalClicks = 0;
-//Timer
-let timer = 0;
 //Count pairs for winning parameters
 let totalPairs = 0;
 //Game won boolean
@@ -35,7 +38,7 @@ $(function(){
 
 
 //Display current clicks
-function displayClicks () {
+function displayClicks() {
   document.getElementById('display-clicks').innerHTML = totalClicks;
 };
 //Shuffle Symbols
@@ -54,6 +57,12 @@ function shuffleCards() {
 
 //Click script
 $('#card-container-inner').on('click','div',function() {
+  //Script for first click, this activates the timer
+  if(firstClick == true){
+    timer();
+    firstClick = false;
+  }
+  //Script for calculating pairs, matches etc.
   if(calculatingPair === false && gameWon === false) {
     //Grab clicked div or 'card' and toggle the 'backside' class
     //The backside class hides the image and changes the colors in css
@@ -96,8 +105,7 @@ $('#card-container-inner').on('click','div',function() {
         pair.toggleClass('current-pair');
         //If the totalPairs is now 8 this means all pairs have been matched, the game is won
         if(totalPairs === 8){
-          gameWon = true;
-          console.log('Game won is ' + gameWon);
+          winGame();
         }
       //If the symbols don't match the else statement will trigger setting the symbol counters
       //to 0 and toggling off 'current pair' and 'backside' classes.
@@ -148,7 +156,58 @@ $('#card-container-inner').on('click','div',function() {
 //New game button
 //Run 'shuffleCards' script
 
+//Game Won script
+function winGame() {
+  //Set gameWon boolean to true 'this stops timer and is used in other functions'
+  gameWon = true;
+  //Win time will be a string made using the timer variables
+  winTime = '';
+  //If the seconds is 0 then the seconds variable becomes a string of two zeros
+  if(seconds === 0) {
+    seconds = '00';
+  }else if (seconds < 10) {
+    //If under 10 seconds but not 0 this adds a zero to the front
+    seconds = '0' + seconds;
+  }
+  //Win message is made up of your totalClicks variable and the timer variables
+  let winMessage = ('Congratulations, you won in ' + totalClicks + ' clicks, your time was '
+  + minutes + ' minutes, ' + seconds + ' seconds');
+  console.log(winMessage);
+}
+
 
 //Timer button
 //On click start counter
 //When game is 'won' counter stops
+function timer() {
+  counter();
+  function counter() {
+    if(gameWon === true){
+      return;
+    }else {
+      if(seconds <= 9) {
+        seconds = seconds + 1;
+        if(seconds === 10){
+          document.getElementById('seconds-display').innerHTML = seconds;
+          setTimeout(counter, 1000);
+        }else if(seconds === 0 || seconds < 10){
+          document.getElementById('seconds-display').innerHTML = '0' + seconds;
+          setTimeout(counter, 1000);
+        }else if (seconds > 10){
+          document.getElementById('seconds-display').innerHTML = seconds;
+          setTimeout(counter, 1000);
+        }
+      }else if(seconds != 59) {
+        seconds = seconds + 1;
+        document.getElementById('seconds-display').innerHTML = seconds;
+        setTimeout(counter, 1000);
+      }else if(seconds === 59) {
+        seconds = 0;
+        document.getElementById('seconds-display').innerHTML = '0' + seconds;
+        minutes = minutes + 1;
+        document.getElementById('minutes-display').innerHTML = minutes;
+        setTimeout(counter, 1000);
+        }
+      }
+    }
+  }
