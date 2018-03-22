@@ -25,12 +25,22 @@
 
 #total-clicks {
   color: red;
-  flex: 1 50%;
+  flex: 1 42%;
 }
 
 #time-taken {
   color: red;
-  flex: 2 50%;
+  flex: 2 42%;
+}
+
+#new-game {
+  flex: 3;
+  height: 40px;
+  width: 40px;
+  color: purple;
+  background-color: orange;
+  border: pink 2px solid;
+  border-radius: 15px;
 }
 
 #card-container {
@@ -169,6 +179,12 @@ rgb(102,230,255));
 
 #win-subtext {
   flex: 3;
+  flex-basis: 100%;
+}
+
+#play-again {
+  margin: 0 auto;
+  height: 30px;
 }
 
 #win-image-left {

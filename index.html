@@ -15,6 +15,7 @@
       <h1 id="game-title">Memory Match Game!</h1>
       <h3 id="total-clicks">Total clicks so far: <span id="display-clicks">0</span>!</h3>
       <h3 id="time-taken">Time taken: <span id="minutes-display">00</span> : <span id="seconds-display">00</span></h3>
+      <button id="new-game" type="reset" onclick="newGame()">New Game</button>
     </header>
 
     <div id="card-container">
@@ -60,6 +61,7 @@
         <h1 id="win-text">You Win!</h1>
         <h3 id="win-subtext">Congratulations you won in <span id="win-clicks"></span> clicks, it took you
           <span id="win-min"></span><span id="win-sec"></span> seconds</h3>
+        <button id="play-again" type="reset" onclick="newGame()">Again?</button>
         <img id="win-image-right" src="images/cactaur.png" alt="cactaur">
       </div>
     </div>

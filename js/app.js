@@ -27,6 +27,8 @@ let totalPairs = 0;
 let gameWon = false;
 //Clicks this guess (max 2)
 let currentClicks = 0;
+//Boolen to force timer to reset
+let resetTimer = false;
 //Create id array for storing the ids of current clicked pair
 let id = []
 //Call shuffleCards function on document ready
@@ -36,6 +38,45 @@ $(function(){
 });
 
 
+//New game button
+function newGame () {
+  //Grab matched cards
+  let matchedCards = $('.matched');
+  //Just in case, grab current-pair class too (to prevent a bug while clicking when one) -
+  //Card is flipped
+  let singleFlipped = $('.current-pair');
+  //Toggle 'backside' and 'matched' classes
+  matchedCards.toggleClass('backside matched');
+  //Toggle 'backside' and 'current-pair' classes in case a single card was flipped first
+  singleFlipped.toggleClass('backside current-pair');
+  //The currentClicks variable is reset to prevent a bug related to a single clicked card
+  currentClicks = 0;
+  //Run shufflecards script
+  shuffleCards();
+  //Reset seconds and minutes to 00
+  seconds = 0;
+  minutes = 0;
+  //Set resetTimer to true which stops the timer counting
+  resetTimer = true;
+  //Draw 00 back to the timer
+  document.getElementById('seconds-display').innerHTML = '0' + seconds;
+  document.getElementById('minutes-display').innerHTML = '0'+ minutes;
+  //Reset total clicks
+  totalClicks = 0;
+  document.getElementById('display-clicks').innerHTML = '0';
+  //If 'gameWon' is true, switch to false
+  if(gameWon === true) {
+    gameWon = false;
+    //Grab win screen
+    let winScreen = $('#win-container');
+    //Toggle 'win-container-hide'
+    winScreen.toggleClass('win-container-hide');
+  }
+  //Check the firstClick boolean, this is what starts the timer initially.
+  if(firstClick === false) {
+    firstClick = true;
+  }
+};
 
 //Display current clicks
 function displayClicks() {
@@ -59,9 +100,12 @@ function shuffleCards() {
 //Click script
 $('#card-container-inner').on('click','div:not(.matched, .current-pair)',function() {
   //Script for first click, this activates the timer
-  if(firstClick == true){
-    timer();
+  if(firstClick === true){
+    //Reset firstClick and resetTimer booleans to false
     firstClick = false;
+    resetTimer = false;
+    //Initalise timer function
+    timer();
   }
   //Script for calculating pairs, matches etc.
   if(calculatingPair === false && gameWon === false) {
@@ -213,8 +257,6 @@ var animations = {
   }
 };
 
-//New game button
-//Run 'shuffleCards' script
 
 //Game Won script
 function winGame() {
@@ -247,7 +289,7 @@ function winGame() {
 function timer() {
   counter();
   function counter() {
-    if(gameWon === true){
+    if(gameWon === true || resetTimer === true){
       return;
     }else {
       //If the seconds counter is less than 9 the script will check for
