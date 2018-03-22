@@ -133,11 +133,65 @@
   border-radius: 30px;
 }
 
+#win-container {
+  background-color: white;
+  width: 90vw;
+  height: 95vh;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.win-container-hide {
+  display: none; !imporant;
+}
+
+#you-win {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(80vw - 160px);
+  height: 140px;
+  background: linear-gradient(rgb(102,255,204),rgb(230,255,102),
+rgb(102,230,255));
+  border:solid 4px #7f66ff;
+  position: absolute;
+  left: 5%;
+  top: 30%;
+  text-align: center;
+  padding: 80px;
+}
+
+
+#win-text {
+  flex: 2;
+  flex-basis: 100%;
+}
+
+#win-subtext {
+  flex: 3;
+}
+
+#win-image-left {
+  flex-basis: 10%;
+  max-width: 200px;
+  position: absolute;
+  left: -10%;
+  top: 5%;
+}
+
+#win-image-right {
+  flex-basis: 10%;
+  max-width: 200px;
+  position: absolute;
+  left: 85%;
+  top: 10%;
+}
+
 
 /* Smaller screens */
 @media screen and (max-width: 630px) {
   .card {
-    width: 80px !important;
-    height: 120px !important;
+    width: 80px;
+    height: 120px;
   }
 }

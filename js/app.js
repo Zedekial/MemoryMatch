@@ -40,6 +40,7 @@ $(function(){
 //Display current clicks
 function displayClicks() {
   document.getElementById('display-clicks').innerHTML = totalClicks;
+  document.getElementById('win-clicks').innerHTML = totalClicks;
 };
 //Shuffle Symbols
 //Each card div is iterated through
@@ -90,6 +91,7 @@ $('#card-container-inner').on('click','div:not(.matched, .current-pair)',functio
       calculatingPair = true;
       //Assign the pair variable based on toggled class 'current-pair'
       let pair = $('.current-pair');
+      animations.flipCard();
       //Access 'symbolsObject' using id name 'id name of card and counters in object are identical',
       //Then increase the item by 1 'they start at 0'
       symbolsObject[id[0]] += 1;
@@ -143,7 +145,8 @@ $('#card-container-inner').on('click','div:not(.matched, .current-pair)',functio
 //Animations
 var animations = {
   flipCard: function() {
-
+    let cardPair = $('.current-pair');
+    console.log(cardPair + ' Was flipped');
   },
 
   notPair: function() {
@@ -170,6 +173,10 @@ var animations = {
       width: cardWidth
     }, 300);
     console.log('No match!')
+    //Reset styles to prevent errors later on
+    setTimeout (function(){
+      cardPair.removeAttr('style');
+    }, 800);
   },
 
   //Matched Pair function is referenced on line 103
@@ -198,6 +205,10 @@ var animations = {
       height: cardHeight,
       width: cardWidth
     }, 300);
+    //Reset styles to prevent errors later on
+    setTimeout (function(){
+      cardPair.removeAttr('style');
+    }, 800);
     console.log('Its a match!')
   }
 };
@@ -207,6 +218,10 @@ var animations = {
 
 //Game Won script
 function winGame() {
+  //Grab div container of win screen
+  let winScreen = $('.win-container-hide');
+  winScreen.toggleClass('win-container-hide');
+  console.log(winScreen);
   //Set gameWon boolean to true 'this stops timer and is used in other functions'
   gameWon = true;
   //Win time will be a string made using the timer variables
@@ -219,6 +234,7 @@ function winGame() {
     seconds = '0' + seconds;
   }
   //Win message is made up of your totalClicks variable and the timer variables
+
   let winMessage = ('Congratulations, you won in ' + totalClicks + ' clicks, your time was '
   + minutes + ' minutes, ' + seconds + ' seconds');
   console.log(winMessage);
@@ -238,14 +254,17 @@ function timer() {
       //whether it's 10 or 0, this is to add a zero in front for aesthetics
       if(seconds <= 9) {
         seconds = seconds + 1;
-        if(seconds === 10){
+        if(seconds === 10) {
           document.getElementById('seconds-display').innerHTML = seconds;
+          document.getElementById('win-sec').innerHTML = seconds;
           setTimeout(counter, 1000);
         }else if(seconds === 0 || seconds < 10){
           document.getElementById('seconds-display').innerHTML = '0' + seconds;
+          document.getElementById('win-sec').innerHTML = '0' + seconds;
           setTimeout(counter, 1000);
         }else if (seconds > 10){
           document.getElementById('seconds-display').innerHTML = seconds;
+          document.getElementById('win-sec').innerHTML = seconds;
           setTimeout(counter, 1000);
         }
       //The code then checks to see if the seconds are at 59, this will increase the
@@ -253,12 +272,15 @@ function timer() {
       }else if(seconds != 59) {
         seconds = seconds + 1;
         document.getElementById('seconds-display').innerHTML = seconds;
+        document.getElementById('win-sec').innerHTML = seconds;
         setTimeout(counter, 1000);
       }else if(seconds === 59) {
         seconds = 0;
         document.getElementById('seconds-display').innerHTML = '0' + seconds;
+        document.getElementById('win-sec').innerHTML = '0' + seconds;
         minutes = minutes + 1;
         document.getElementById('minutes-display').innerHTML = minutes;
+        document.getElementById('win-min').innerHTML = minutes + 'minutes and ';
         setTimeout(counter, 1000);
         }
       }
