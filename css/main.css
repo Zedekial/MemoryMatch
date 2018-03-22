@@ -38,6 +38,7 @@
   width: 80vw;
   height: auto;
   padding: 10px;
+  margin: 0 auto;
   border: solid 3px purple;
 }
 
@@ -46,15 +47,16 @@
   flex-wrap: wrap;
   width: auto;
   max-width: 600px;
+  position: relative;
   justify-content: center;
   margin: 0 auto;
 }
 
 .card {
   background-color: pink;
-  position: relative;
   width: 100px;
   height: 150px;
+  margin: auto;
   border: solid black 2px;
   border-radius: 30px;
   margin: 10px;
@@ -135,7 +137,7 @@
 /* Smaller screens */
 @media screen and (max-width: 630px) {
   .card {
-    width: 80px;
-    height: 120px;
+    width: 80px !important;
+    height: 120px !important;
   }
 }

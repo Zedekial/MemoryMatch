@@ -56,7 +56,7 @@ function shuffleCards() {
 };
 
 //Click script
-$('#card-container-inner').on('click','div',function() {
+$('#card-container-inner').on('click','div:not(.matched, .current-pair)',function() {
   //Script for first click, this activates the timer
   if(firstClick == true){
     timer();
