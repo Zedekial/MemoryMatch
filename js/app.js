@@ -108,6 +108,9 @@ function shuffleCards() {
 };
 
 //Click script
+//Works on cards inside their container, but NOT if a card is matched or
+//'current-pair' to stop bugs with clicking on already matched pairs or a
+//Single flipped card
 $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
   //Script for first click, this activates the timer
   if(firstClick === true){
@@ -119,9 +122,13 @@ $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
   }
   //Script for calculating pairs, matches etc.
   if(calculatingPair === false && gameWon === false) {
-    //Grab clicked div or 'card' and toggle the 'backside' class
+    let thisCard = $(this);
+    //Grab clicked div or 'card' and toggle the 'backside' and 'frontside' classes
     //The backside class hides the image and changes the colors in css
-    $(this).toggleClass('backside');
+    //This delay on the 'backside' class toggle is for a smoother animation on the flip
+    setTimeout(function(){
+      thisCard.toggleClass('backside');
+    },300)
     $(this).toggleClass('frontside');
     $(this).toggleClass('current-pair');
     //Pushes id of current clicked card as a string in the id object

@@ -70,25 +70,26 @@
 }
 
 .card {
-
   width: 100px;
   height: 150px;
   margin: auto;
   border: solid black 2px;
   border-radius: 30px;
   margin: 10px;
+  background-color: pink;
   position: absolute;
+  transition: 0.8s ease-out;
+  transform-style: preserve-3d;
 }
 
 .backside {
   background-color: white;
   background-image: none !important;
-  transform: rotateY(0deg);
+  transform: rotateY(180deg);
 }
 
 .frontside {
-  transform: rotateY(180deg);
-  background-color: pink;
+  transform: rotateY(0deg);
 }
 
 /* Symbols */
