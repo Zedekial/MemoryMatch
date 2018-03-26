@@ -1,55 +1,84 @@
 /* CSS Stylesheet */
+
 #main-page {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: #fafafa;
 }
 
+/* Top banner */
 #game-title-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-  width: 80vw;
-  background-color: blue;
-  height: 100px;
-  padding: 10px;
-  padding-top: 30px;
+  width: 90vw;
+  background-color: #ffa54d;
+  height: 140px;
+  padding: 20px 10px 20px 10px;
+  margin-bottom: 20px;
 }
 
 #game-title {
-  color: white;
+  color: #009a63;
   flex: 0 100%;
   margin: 0 auto;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  font-family: Didot, fantasy;
+  border-bottom: #36454f 5px solid;
 }
 
 #total-clicks {
-  color: red;
+  color: #36454f;
   flex: 1 42%;
+  padding-left: 40px;
 }
 
 #time-taken {
-  color: red;
+  color: #36454f;
   flex: 2 42%;
 }
 
+.title-image {
+  height: 70px;
+  width: auto;
+}
+
+.counters {
+  color: #a54dff;
+}
+
+/* New game button */
 #new-game {
   flex: 3;
   height: 40px;
   width: 40px;
-  color: purple;
-  background-color: orange;
-  border: pink 2px solid;
+  color: black;
+  background-color: #005aff;
+  border: black 2px solid;
   border-radius: 15px;
 }
 
+#new-game:hover {
+  background-color: #00e695
+}
+
+#new-game:active {
+  background-color: #00ffa5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/* Cards, containers & related */
 #card-container-outer {
-  background-color: lightblue;
+  background-color: #cde6ff;
   width: 80vw;
   height: auto;
   padding: 10px;
   margin: 0 auto;
-  border: solid 3px purple;
+  border: solid 3px #4ea7ff;
 }
 
 #card-container-inner {
@@ -58,7 +87,7 @@
   justify-content: center;
   width: auto;
   max-width: 500px;
-  height: 70vh;
+  height: 75vh;
   margin: 0 auto;
 }
 
@@ -66,7 +95,7 @@
   position: relative;
   display: flex;
   flex-basis: 25%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .card {
@@ -76,7 +105,7 @@
   border: solid black 2px;
   border-radius: 30px;
   margin: 10px;
-  background-color: pink;
+  background-color: #ffe6cd;
   position: absolute;
   transition: 0.8s ease-out;
   transform-style: preserve-3d;
@@ -84,12 +113,19 @@
 
 .backside {
   background-color: white;
-  background-image: none !important;
+  background-image: url('../images/cardback.png') !important;
   transform: rotateY(180deg);
+  box-shadow: -10px 10px 10px grey;
+}
+
+.backside:hover {
+  top: -1%;
+  left: -1%;
 }
 
 .frontside {
   transform: rotateY(0deg);
+  box-shadow: 10px 10px 10px grey;
 }
 
 /* Symbols */
@@ -158,8 +194,10 @@
   border-radius: 30px;
 }
 
+
+/* Win screen related */
 #win-container {
-  background-color: white;
+  background-color: none;
   width: 90vw;
   height: 95vh;
   margin: 0;
@@ -197,16 +235,31 @@ rgb(102,230,255));
   flex-basis: 100%;
 }
 
+/* New game button */
 #play-again {
   margin: 0 auto;
   height: 30px;
+  color: black;
+  background-color: #005aff;
+  border: black 2px solid;
+  border-radius: 15px;
+}
+
+#play-again:hover {
+  background-color: #00ffa5;
+}
+
+#play-again:active {
+  background-color: #00ffa5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 #win-image-left {
   flex-basis: 10%;
   max-width: 200px;
   position: absolute;
-  left: -10%;
+  left: 10%;
   top: 5%;
 }
 

@@ -46,9 +46,9 @@ function newGame () {
   //Card is flipped
   let singleFlipped = $('.current-pair');
   //Toggle 'backside' and 'matched' classes
-  matchedCards.toggleClass('backside matched');
+  matchedCards.toggleClass('backside frontside matched');
   //Toggle 'backside' and 'current-pair' classes in case a single card was flipped first
-  singleFlipped.toggleClass('backside current-pair');
+  singleFlipped.toggleClass('backside frontside current-pair');
   //The currentClicks variable is reset to prevent a bug related to a single clicked card
   currentClicks = 0;
   //Run shufflecards script
@@ -128,39 +128,34 @@ $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
     //This delay on the 'backside' class toggle is for a smoother animation on the flip
     setTimeout(function(){
       thisCard.toggleClass('backside');
-    },300)
-    $(this).toggleClass('frontside');
+    },100)
+    setTimeout(function(){
+      thisCard.toggleClass('frontside');
+    },100)
     $(this).toggleClass('current-pair');
     //Pushes id of current clicked card as a string in the id object
     id.push($(this).attr('id'));
     currentCard = $(this).attr('id');
-    console.log(id)
     //Store class
     let cardClass = $(this).attr('class');
-    console.log('Classes are ' + cardClass);
-    console.log('You clicked a ' + currentCard);
     //Stores number of total clicks on cards to 'click' variable
     totalClicks = totalClicks + 1;
     displayClicks();
     //Stores current clicks in 'currentClicks' variable, once at 2 it will check to see
     //if symbols are matched
     currentClicks = currentClicks + 1;
-    console.log('Number of clicks so far ' + totalClicks);
-    console.log('Current clicks ' + currentClicks);
     //Checks if current clicks are 2 (for a pair), if true checks symbols for each id,
     if(currentClicks === 2){
       //Switch the 'calculatingPair' boolean to true, this is to stop rampant clicking
       calculatingPair = true;
       //Assign the pair variable based on toggled class 'current-pair'
       let pair = $('.current-pair');
-      animations.flipCard();
       //Access 'symbolsObject' using id name 'id name of card and counters in object are identical',
       //Then increase the item by 1 'they start at 0'
       symbolsObject[id[0]] += 1;
       symbolsObject[id[1]] += 1;
       //If symbols in array 'id' match it will state a pair has been matched
       if(id[0] === id[1]){
-        console.log('You matched a pair, a ' + id[0] + ' and a ' + id[1])
         //Add a count of 1 to the 'totalPairs' variable
         totalPairs = totalPairs + 1;
         //Run 'matchedPair' function for animation
@@ -180,7 +175,7 @@ $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
         //Update variable object based on id of card
         symbolsObject[id[0]] = 0;
         symbolsObject[id[1]] = 0;
-        //Run the flipCard script
+        //Run the not pair animations
         animations.notPair();
         //Toggle off the 'current-pair' class
         pair.toggleClass('current-pair');
@@ -189,16 +184,12 @@ $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
         setTimeout (function() {
           pair.toggleClass('backside');
           pair.toggleClass('frontside');
-        }, 800);
-
-        console.log(pair);
-        console.log('No match ' + id[0] + ' and ' + id[1] + ' have been reset to 0!');
+        }, 1300);
       }
       //After checking for pairs the current clicks will be reset to 0
       currentClicks = 0;
       //Resets the array containing the current pair to empty it. Otherwise the array keeps filling.
       id.length = 0;
-      console.log('Current Clicks has been reset to ' + currentClicks);
       //Reset the 'calculatingPair' boolean to allow clicking again
       setTimeout (function() {
       calculatingPair = false;
@@ -209,39 +200,39 @@ $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
 
 //Animations
 var animations = {
-  flipCard: function() {
-    let cardPair = $('.current-pair');
-    console.log(cardPair + ' Was flipped');
-  },
-
   notPair: function() {
     //Grab the pair using the temporary 'current-pair' class, this is toggled
     //on and off during the script.
     let cardPair = $('.current-pair');
+    //Grab height and width of card (this is to work with different viewports)
+    let cardHeight = cardPair.css('height');
+    let cardWidth = cardPair.css('width');
+    //Set growheight and width based on current height/width of cards
+    let growHeight = parseFloat(cardHeight, 10) - 20;
+    let growWidth = parseFloat(cardWidth, 10) - 20;
     //Change border color to red temporarily
     cardPair.css('border-color', 'red');
     setTimeout (function(){
       cardPair.css('border-color', 'black');
-    }, 800);
-    //Animate the current pair to squash and stretch
-    let cardHeight = cardPair.css('height');
-    let cardWidth = cardPair.css('width');
-    let growHeight = parseFloat(cardHeight, 10) - 20;
-    let growWidth = parseFloat(cardWidth, 10) - 20;
-    cardPair.animate({
-      height: growHeight,
-      width: growWidth
-    }, 300);
-    //Then animate to be the original size
-    cardPair.animate({
-      height: cardHeight,
-      width: cardWidth
-    }, 300);
-    console.log('No match!')
-    //Reset styles to prevent errors later on
+    }, 1200);
+    //Animate the current pair to shrink
+    //The timeout is to let the flip animation run, giving a smoother look
     setTimeout (function(){
-      cardPair.removeAttr('style');
-    }, 800);
+      cardPair.animate({
+        height: growHeight,
+        width: growWidth
+      }, 300);
+      //Then animate to be the original size
+      cardPair.animate({
+        height: cardHeight,
+        width: cardWidth
+      }, 300);
+      //Reset styles to prevent errors later on
+      setTimeout (function(){
+        cardPair.removeAttr('style');
+      }, 800);
+    },500);
+
   },
 
   //Matched Pair function is referenced on line 103
@@ -249,32 +240,34 @@ var animations = {
     //Grab the pair using the temporary 'current-pair' class, this is toggled
     //on and off during the script.
     let cardPair = $('.current-pair');
+    //Grab height and width of card (this is to work with different viewports)
+    let cardHeight = cardPair.css('height');
+    let cardWidth = cardPair.css('width');
+    //Set growheight and width based on current height/width of cards
+    let growHeight = parseFloat(cardHeight, 10) + 20;
+    let growWidth = parseFloat(cardWidth, 10) + 20;
     //Change border color to green temporarily
     cardPair.css('border-color', 'green');
     setTimeout (function(){
       cardPair.css('border-color', 'black');
-    }, 800);
+    }, 1200);
     //Animate the current pair to be slightly bigger
-    let cardHeight = cardPair.css('height');
-    let cardWidth = cardPair.css('width');
-    let growHeight = parseFloat(cardHeight, 10) + 20;
-    let growWidth = parseFloat(cardWidth, 10) + 20;
-    console.log(growHeight + ' ' + growWidth);
-    console.log(cardHeight + ' ' + cardWidth);
-    cardPair.animate({
-      height: growHeight,
-      width: growWidth
-    }, 300);
-    //Then animate to be the original size
-    cardPair.animate({
-      height: cardHeight,
-      width: cardWidth
-    }, 300);
-    //Reset styles to prevent errors later on
-    setTimeout (function(){
-      cardPair.removeAttr('style');
-    }, 800);
-    console.log('Its a match!')
+    //The timeout is to let the flip animation run, giving a smoother look
+    setTimeout( function(){
+      cardPair.animate({
+        height: growHeight,
+        width: growWidth
+      }, 300);
+      //Then animate to be the original size
+      cardPair.animate({
+        height: cardHeight,
+        width: cardWidth
+      }, 300);
+      //Reset styles to prevent errors later on
+      setTimeout (function(){
+        cardPair.removeAttr('style');
+      }, 800);
+    },500);
   }
 };
 
@@ -285,7 +278,6 @@ function winGame() {
   setTimeout (function(){
     let winScreen = $('.win-container-hide');
     winScreen.toggleClass('win-container-hide');
-    console.log(winScreen);
     //Set gameWon boolean to true 'this stops timer and is used in other functions'
     gameWon = true;
     //Win time will be a string made using the timer variables
@@ -297,11 +289,6 @@ function winGame() {
       //If under 10 seconds but not 0 this adds a zero to the front
       seconds = '0' + seconds;
     }
-    //Win message is made up of your totalClicks variable and the timer variables
-
-    let winMessage = ('Congratulations, you won in ' + totalClicks + ' clicks, your time was '
-    + minutes + ' minutes, ' + seconds + ' seconds');
-    console.log(winMessage);
   },500);
 };
 
@@ -345,7 +332,11 @@ function timer() {
         document.getElementById('win-sec').innerHTML = '0' + seconds;
         minutes = minutes + 1;
         document.getElementById('minutes-display').innerHTML = minutes;
-        document.getElementById('win-min').innerHTML = minutes + 'minutes and ';
+        if(win-min === 1) {
+          document.getElementById('win-min').innerHTML = minutes + ' minute and ';
+        }else {
+          document.getElementById('win-min').innerHTML = minutes + ' minutes and ';
+        }
         setTimeout(counter, 1000);
         }
       }
