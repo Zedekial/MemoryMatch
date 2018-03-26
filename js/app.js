@@ -95,10 +95,20 @@ function shuffleCards() {
     //Remove all card divs, shuffle and then add back to container div
     container.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
   }
+  //Grab all cards
+  let cards = $('.card');
+  //toggle backside & frontside to show cards
+  cards.toggleClass('backside');
+  cards.toggleClass('frontside');
+  //Toggle again after a short delay to flip back over
+  setTimeout (function() {
+    cards.toggleClass('frontside');
+    cards.toggleClass('backside');
+  },500);
 };
 
 //Click script
-$('#card-container-inner').on('click','div:not(.matched, .current-pair)',function() {
+$('.card-container').on('click','div:not(.matched, .current-pair)',function() {
   //Script for first click, this activates the timer
   if(firstClick === true){
     //Reset firstClick and resetTimer booleans to false
@@ -112,6 +122,7 @@ $('#card-container-inner').on('click','div:not(.matched, .current-pair)',functio
     //Grab clicked div or 'card' and toggle the 'backside' class
     //The backside class hides the image and changes the colors in css
     $(this).toggleClass('backside');
+    $(this).toggleClass('frontside');
     $(this).toggleClass('current-pair');
     //Pushes id of current clicked card as a string in the id object
     id.push($(this).attr('id'));
@@ -153,6 +164,7 @@ $('#card-container-inner').on('click','div:not(.matched, .current-pair)',functio
         pair.toggleClass('current-pair');
         //If the totalPairs is now 8 this means all pairs have been matched, the game is won
         if(totalPairs === 8){
+          //Execute win game script on line 275
           winGame();
         }
       //If the symbols don't match the else statement will trigger, setting the symbol counters
@@ -166,8 +178,10 @@ $('#card-container-inner').on('click','div:not(.matched, .current-pair)',functio
         //Toggle off the 'current-pair' class
         pair.toggleClass('current-pair');
         //After a 1 second delay the cards return to 'backside' using the backside class
+        //Then toggle the 'frontside' class for css flip animation
         setTimeout (function() {
           pair.toggleClass('backside');
+          pair.toggleClass('frontside');
         }, 800);
 
         console.log(pair);
@@ -261,26 +275,28 @@ var animations = {
 //Game Won script
 function winGame() {
   //Grab div container of win screen
-  let winScreen = $('.win-container-hide');
-  winScreen.toggleClass('win-container-hide');
-  console.log(winScreen);
-  //Set gameWon boolean to true 'this stops timer and is used in other functions'
-  gameWon = true;
-  //Win time will be a string made using the timer variables
-  winTime = '';
-  //If the seconds is 0 then the seconds variable becomes a string of two zeros
-  if(seconds === 0) {
-    seconds = '00';
-  }else if (seconds < 10) {
-    //If under 10 seconds but not 0 this adds a zero to the front
-    seconds = '0' + seconds;
-  }
-  //Win message is made up of your totalClicks variable and the timer variables
+  setTimeout (function(){
+    let winScreen = $('.win-container-hide');
+    winScreen.toggleClass('win-container-hide');
+    console.log(winScreen);
+    //Set gameWon boolean to true 'this stops timer and is used in other functions'
+    gameWon = true;
+    //Win time will be a string made using the timer variables
+    winTime = '';
+    //If the seconds is 0 then the seconds variable becomes a string of two zeros
+    if(seconds === 0) {
+      seconds = '00';
+    }else if (seconds < 10) {
+      //If under 10 seconds but not 0 this adds a zero to the front
+      seconds = '0' + seconds;
+    }
+    //Win message is made up of your totalClicks variable and the timer variables
 
-  let winMessage = ('Congratulations, you won in ' + totalClicks + ' clicks, your time was '
-  + minutes + ' minutes, ' + seconds + ' seconds');
-  console.log(winMessage);
-}
+    let winMessage = ('Congratulations, you won in ' + totalClicks + ' clicks, your time was '
+    + minutes + ' minutes, ' + seconds + ' seconds');
+    console.log(winMessage);
+  },500);
+};
 
 
 //Timer button

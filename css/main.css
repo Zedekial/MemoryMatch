@@ -43,7 +43,7 @@
   border-radius: 15px;
 }
 
-#card-container {
+#card-container-outer {
   background-color: lightblue;
   width: 80vw;
   height: auto;
@@ -55,26 +55,40 @@
 #card-container-inner {
   display: flex;
   flex-wrap: wrap;
-  width: auto;
-  max-width: 600px;
-  position: relative;
   justify-content: center;
+  width: auto;
+  max-width: 500px;
+  height: 70vh;
   margin: 0 auto;
 }
 
+.card-container {
+  position: relative;
+  display: flex;
+  flex-basis: 25%;
+  justify-content: center;
+}
+
 .card {
-  background-color: pink;
+
   width: 100px;
   height: 150px;
   margin: auto;
   border: solid black 2px;
   border-radius: 30px;
   margin: 10px;
+  position: absolute;
 }
 
 .backside {
   background-color: white;
   background-image: none !important;
+  transform: rotateY(0deg);
+}
+
+.frontside {
+  transform: rotateY(180deg);
+  background-color: pink;
 }
 
 /* Symbols */
@@ -202,7 +216,6 @@ rgb(102,230,255));
   left: 85%;
   top: 10%;
 }
-
 
 /* Smaller screens */
 @media screen and (max-width: 630px) {
