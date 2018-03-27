@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #fafafa;
+  background-color: #ffa54d;
 }
 
 /* Top banner */
@@ -14,7 +14,6 @@
   justify-content: center;
   text-align: center;
   width: 90vw;
-  background-color: #ffa54d;
   height: 140px;
   padding: 20px 10px 20px 10px;
   margin-bottom: 20px;
@@ -24,21 +23,50 @@
   color: #009a63;
   flex: 0 100%;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding-bottom: 20px;
   font-family: Didot, fantasy;
   border-bottom: #36454f 5px solid;
+  font-size: 4em;
+}
+
+#flamecontainer {
+  display: flex;
+  flex: 3 15%;
+  justify-content: flex-start;
+  padding-right: 50px;
+}
+
+#flametitle {
+  margin-left: 10px;
+  font-size: 1.5em;
+  color: #c72626;
+  text-align: left;
+}
+
+.flameicon {
+  height: 50px;
+  width: 50px;
+  margin: 0 auto;
+}
+
+.flameiconhide {
+  visibility: hidden; !imporant;
 }
 
 #total-clicks {
   color: #36454f;
-  flex: 1 42%;
-  padding-left: 40px;
+  flex: 1 35%;
+  font-size: 1.5em;
+  text-align: left;
+  margin-left: 20px;
 }
 
 #time-taken {
   color: #36454f;
-  flex: 2 42%;
+  flex: 2 35%;
+  font-size: 1.5em;
+  text-align: left;
 }
 
 .title-image {
@@ -59,6 +87,7 @@
   background-color: #005aff;
   border: black 2px solid;
   border-radius: 15px;
+  margin-top: 10px;
 }
 
 #new-game:hover {
@@ -233,6 +262,12 @@ rgb(102,230,255));
 #win-subtext {
   flex: 3;
   flex-basis: 100%;
+}
+
+.win-flame {
+  width: 30px;
+  height: auto;
+  margin-left: 5px;
 }
 
 /* New game button */

@@ -21,6 +21,8 @@ let seconds = 00;
 let minutes = 00;
 //Click counter
 let totalClicks = 0;
+//Score counter (starts at 3 and minimum is 1)
+let score = 3;
 //Count pairs for winning parameters
 let totalPairs = 0;
 //Game won boolean
@@ -29,6 +31,9 @@ let gameWon = false;
 let currentClicks = 0;
 //Boolen to force timer to reset
 let resetTimer = false;
+//Boolean for flamce icon b and c (to prevent further toggling)
+let flameBToggled = false;
+let flameCToggled = false;
 //Create id array for storing the ids of current clicked pair
 let id = []
 //Call shuffleCards function on document ready
@@ -141,6 +146,11 @@ $('.card-container').on('click','div:not(.matched, .current-pair)',function() {
     //Stores number of total clicks on cards to 'click' variable
     totalClicks = totalClicks + 1;
     displayClicks();
+    //Checks if total clicks is now over 19
+    if(totalClicks === 24 || totalClicks === 30){
+      //Run the reduce star script
+      reduceStar();
+    };
     //Stores current clicks in 'currentClicks' variable, once at 2 it will check to see
     //if symbols are matched
     currentClicks = currentClicks + 1;
@@ -292,6 +302,36 @@ function winGame() {
   },500);
 };
 
+//Hide Flame(score) script
+function reduceStar() {
+  //Get each of the three flame icons by their class
+  //Flame icon a (the first one) isn't needed as the lowest score is always 1 icon
+  let flameIconB = $('.flame-b');
+  let flameIconC = $('.flame-c');
+  //Check for either time or clicks parameter
+  if(seconds >= 40 || totalClicks >= 24) {
+    //Check boolean to prevent future toggling on/off
+    if(flameCToggled === false) {
+      //Hide last icon if seconds or clicks is over '3 star parameters'
+      flameIconC.toggleClass('flameiconhide');
+      flameCToggled = true;
+      score = score - 1;
+      document.getElementById('score-display').innerHTML = score;
+    }
+  }
+  //Continue on to check the second set of parameters
+    if(seconds >= 59 || totalClicks >= 30) {
+      //Check boolean again to prevent toggling on/off
+      if(flameBToggled === false) {
+        //Hide the second/middle icon if clicks or seconds is over '2 star parameters'
+        flameIconB.toggleClass('flameiconhide');
+        flameBToggled = true;
+        score = score - 1;
+        document.getElementById('score-display').innerHTML = score;
+    }
+  }
+};
+
 
 //Timer button
 //On click start counter
@@ -322,17 +362,25 @@ function timer() {
       //The code then checks to see if the seconds are at 59, this will increase the
       //minute counter and reset the seconds to 0 if at 59
       }else if(seconds != 59) {
+        //Checks if seconds is at 40
+        if(seconds === 40) {
+          //Runs the reduce star script
+          reduceStar();
+        };
         seconds = seconds + 1;
         document.getElementById('seconds-display').innerHTML = seconds;
         document.getElementById('win-sec').innerHTML = seconds;
         setTimeout(counter, 1000);
       }else if(seconds === 59) {
+        //Runs the reduce star script
+        reduceStar();
+        //Continues through script
         seconds = 0;
         document.getElementById('seconds-display').innerHTML = '0' + seconds;
         document.getElementById('win-sec').innerHTML = '0' + seconds;
         minutes = minutes + 1;
         document.getElementById('minutes-display').innerHTML = minutes;
-        if(win-min === 1) {
+        if(minutes === 1) {
           document.getElementById('win-min').innerHTML = minutes + ' minute and ';
         }else {
           document.getElementById('win-min').innerHTML = minutes + ' minutes and ';
