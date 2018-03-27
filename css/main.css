@@ -241,27 +241,26 @@
 #you-win {
   display: flex;
   flex-wrap: wrap;
-  width: calc(80vw - 160px);
-  height: 140px;
+  width: 90vw;
+  height: auto;
   background: linear-gradient(rgb(102,255,204),rgb(230,255,102),
 rgb(102,230,255));
   border:solid 4px #7f66ff;
   position: absolute;
-  left: 5%;
   top: 30%;
   text-align: center;
-  padding: 80px;
+  padding: 10px;
 }
 
 
 #win-text {
-  flex: 2;
-  flex-basis: 100%;
+  flex: 2 40%;
+  margin: auto;
 }
 
 #win-subtext {
-  flex: 3;
-  flex-basis: 100%;
+  flex: 3 100%;
+  margin-top: 0;
 }
 
 .win-flame {
@@ -270,14 +269,27 @@ rgb(102,230,255));
   margin-left: 5px;
 }
 
+#win-image-left {
+  flex: 1;
+  height: auto;
+  max-width: 200px;
+}
+
+#win-image-right {
+  flex: 5;
+  height: auto;
+  max-width: 200px;
+}
 /* New game button */
 #play-again {
   margin: 0 auto;
-  height: 30px;
+  height: 40px;
   color: black;
   background-color: #005aff;
   border: black 2px solid;
   border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 #play-again:hover {
@@ -290,26 +302,293 @@ rgb(102,230,255));
   transform: translateY(4px);
 }
 
-#win-image-left {
-  flex-basis: 10%;
-  max-width: 200px;
-  position: absolute;
-  left: 10%;
-  top: 5%;
+
+/* Various screens */
+@media screen and (min-width: 320px) and (max-width: 549px) {
+  #game-title-container {
+    height: 300px;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  #game-title {
+    display: flex;
+    font-size: 1.3em;
+    padding-bottom: 0;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  #flamecontainer {
+    justify-content: flex-start;
+    flex: 50%;
+    padding-right: 10px;
+  }
+
+  #flametitle {
+    font-size: 1em;
+    margin-left: 0;
+  }
+
+  .flameicon {
+    height: 30px;
+    width: 30px;
+  }
+
+  #total-clicks {
+    font-size: 1em;
+    flex: 1 100%;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  #time-taken {
+    font-size: 1em;
+    flex: 2 100%;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .title-image {
+    height: 40px;
+    width: auto;
+  }
+
+  /* New game button */
+  #new-game {
+    flex: 3 50%;
+  }
+
+  .card {
+    width: 55px;
+    height: 90px;
+    border-radius: 15px !important;
+    margin: 5px;
+  }
+
+
+    #card-container-outer {
+      padding: 0;
+      margin: 0;
+      width: 90vw;
+    }
+
+    #card-container-inner {
+      height: 65vh;
+    }
 }
 
-#win-image-right {
-  flex-basis: 10%;
-  max-width: 200px;
-  position: absolute;
-  left: 85%;
-  top: 10%;
+@media screen and (min-width: 320px) and (max-width: 800px) {
+  /* Win screen related */
+  #win-container {
+    width: 90vw;
+    height: 95vh;
+  }
+
+  #you-win {
+    width: 85vw;
+    height: 500px;
+    top: 10%;
+    text-align: center;
+    padding: 10px;
+  }
+
+
+  #win-text {
+    flex: 2 100%;
+  }
+
+  #win-subtext {
+    flex: 3;
+    flex-basis: 100%;
+  }
+
+  .win-flame {
+    width: 30px;
+    height: auto;
+    margin-left: 5px;
+    margin-bottom: -10px;
+  }
+
+  /* New game button */
+  #play-again {
+    margin: 0 auto;
+    height: 30px;
+    color: black;
+    background-color: #005aff;
+    border: black 2px solid;
+    border-radius: 15px;
+  }
+
+  #play-again:hover {
+    background-color: #00ffa5;
+  }
+
+  #play-again:active {
+    background-color: #00ffa5;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  #win-image-left {
+    margin: 0 auto;
+    flex: 1 20%;
+    position: relative;
+    top: auto;
+    left: auto;
+  }
+
+  #win-image-right {
+    display: none;
+  }
 }
 
-/* Smaller screens */
-@media screen and (max-width: 630px) {
+@media screen and (min-width: 550px) and (max-width: 800px) {
+  #game-title-container {
+    height: 300px;
+    margin-bottom: 0;
+  }
+
+  #game-title {
+    font-size: 2.3em;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+  }
+
+  #flamecontainer {
+    justify-content: flex-start;
+    flex: 40%;
+    padding-right: 70px;
+  }
+
+  #flametitle {
+    font-size: 1.3em;
+    margin-left: 0;
+  }
+
+  .flameicon {
+    height: 45px;
+    width: 45px;
+  }
+
+  #total-clicks {
+    font-size: 1.3em;
+    flex: 1 50%;
+    margin: 0;
+  }
+
+  #time-taken {
+    font-size: 1.3em;
+    flex: 2 50%;
+    margin: 0;
+  }
+
+  .title-image {
+    height: 70px;
+    width: auto;
+  }
+
+  /* New game button */
+  #new-game {
+    width: 40px;
+  }
+
   .card {
     width: 80px;
     height: 120px;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 999px) {
+  #game-title-container {
+    height: 200px;
+    margin-bottom: 0;
+  }
+
+  #game-title {
+    font-size: 2.3em;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+  }
+
+  #flamecontainer {
+    justify-content: flex-start;
+    flex: 15%;
+    padding-right: 20px;
+  }
+
+  #flametitle {
+    font-size: 1.3em;
+    margin-left: 0;
+  }
+
+  .flameicon {
+    height: 45px;
+    width: 45px;
+  }
+
+  #total-clicks {
+    font-size: 1.3em;
+    flex: 1 30%;
+  }
+
+  #time-taken {
+    font-size: 1.3em;
+    flex: 2 30%;
+  }
+
+  .title-image {
+    height: 70px;
+    width: auto;
+  }
+
+  /* New game button */
+  #new-game {
+    width: 40px;
+  }
+
+  .card {
+    width: 90px;
+    height: 130px;
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1400px) {
+  #game-title {
+    font-size: 3.5em;
+  }
+
+  #flamecontainer {
+    justify-content: flex-start;
+    padding-right: 20px;
+  }
+
+  #flametitle {
+    font-size: 1.3em;
+  }
+
+  .flameicon {
+    height: 45px;
+    width: 45px;
+  }
+
+  #total-clicks {
+    font-size: 1.3em;
+    flex: 1 32%;
+  }
+
+  #time-taken {
+    font-size: 1.3em;
+    flex: 2 32%;
+  }
+
+  .title-image {
+    height: 70px;
+    width: auto;
+  }
+
+  /* New game button */
+  #new-game {
+    width: 50px;
   }
 }

@@ -56,6 +56,21 @@ function newGame () {
   singleFlipped.toggleClass('backside frontside current-pair');
   //The currentClicks variable is reset to prevent a bug related to a single clicked card
   currentClicks = 0;
+  //Reset score variable to 3
+  score = 3;
+  //Reset the flame icons which indicate Score
+  //First grabs each flame icon by their class name
+  let flameIconB = $('.flame-b');
+  let flameIconC = $('.flame-c');
+  //Then checks if each toogle indicator is true
+  if(flameCToggled === true) {
+    flameCToggled = false;
+    flameIconC.toggleClass('flameiconhide');
+    if(flameBToggled === true){
+      flameBToggled = false;
+      flameIconB.toggleClass('flameiconhide');
+    }
+  }
   //Run shufflecards script
   shuffleCards();
   //Reset seconds and minutes to 00
