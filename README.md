@@ -15,7 +15,7 @@ All you need to play the game is a browser. Google Chrome is recommended as it
 was used primarily in testing.
 ```
 
-##Built with
+## Built with
 
 ```
 HTML, CSS, Javascript and JQuery.
