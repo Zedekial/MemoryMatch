@@ -1,4 +1,4 @@
-#Davids Memory Match Game
+# Davids Memory Match Game
 
 ```
 A simple memory match game where you match 8 pairs of cards while being timed.
@@ -8,7 +8,7 @@ The game is won when all pairs are matched and flipped.
 
 ![Chocobo](images/chocobo.png)
 
-##Prerequisites
+## Prerequisites
 
 ```
 All you need to play the game is a browser. Google Chrome is recommended as it
@@ -21,30 +21,30 @@ was used primarily in testing.
 HTML, CSS, Javascript and JQuery.
 ```
 
-##Contributing
+## Contributing
 
 ```
 This is a project for learning purposes. No contributions are required.
 ```
 
-##Bugs
+## Bugs
 
 ```
 If you happen to find any bugs while playing the memory match game, please leave
 a comment on the main INDEX.html file
 ```
 
-##Authors
+## Authors
 
 * **David Garrood** - Full Project
 
-##License
+## License
 
 ```
 This project is not licensed.
 ```
 
-##Acknowledgments
+## Acknowledgments
 
 ```
 In building this project google was heavily used. Forums such as stackoverflow,
