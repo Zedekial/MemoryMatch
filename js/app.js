@@ -71,6 +71,8 @@ function newGame () {
       flameIconB.toggleClass('flameiconhide');
     }
   }
+  //Reset 'totalPairs'
+  totalPairs = 0;
   //Run shufflecards script
   shuffleCards();
   //Reset seconds and minutes to 00
